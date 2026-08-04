@@ -92,12 +92,12 @@ class LlamaState: ObservableObject {
         await llamaContext.completion_init(text: text)
         let t_heat_end = DispatchTime.now().uptimeNanoseconds
 
-        var full = ""
         Task.detached {
+            var localFull = ""
             while await !llamaContext.is_done {
                 let result = await llamaContext.completion_loop()
                 if !result.isEmpty {
-                    full += result
+                    localFull += result
                     streamTo(result)
                 }
             }
@@ -109,7 +109,7 @@ class LlamaState: ObservableObject {
 
             await llamaContext.clear()
             await MainActor.run {
-                onDone(full, tps)
+                onDone(localFull, tps)
             }
         }
     }
