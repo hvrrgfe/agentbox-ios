@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- 应用基本配置 -->
+    <key>CFBundleDisplayName</key>
+    <string>AgentBox</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+
+    <!-- ATS：允许加载 https 的模型下载与网页 -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+        <key>NSAllowsArbitraryLoadsInWebContent</key>
+        <true/>
+    </dict>
+
+    <!-- Web 内容支持 -->
+    <key>NSBonjourServices</key>
+    <array><string>_http._tcp</string></array>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>用于加载本地 Agent 网页资源。</string>
+
+    <!-- 文件导入支持 -->
+    <key>LSSupportsOpeningDocumentsInPlace</key>
+    <true/>
+    <key>UIFileSharingEnabled</key>
+    <true/>
+
+    <!-- 系统权限说明（本应用无需相机/定位等） -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>用于从相册选择或共享模型相关文件。</string>
+
+    <!-- 启动/场景（配合 GENERATE_INFOPLIST_FILE 生成部分） -->
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+    </dict>
+    <key>UILaunchScreen_Generation</key>
+    <true/>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+</dict>
+</plist>

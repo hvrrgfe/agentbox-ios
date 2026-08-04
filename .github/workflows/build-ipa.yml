@@ -1,0 +1,82 @@
+name: Build IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: build-ipa
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repo (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Select Xcode
+        run: |
+          echo "Available Xcodes:"
+          sudo xcode-select -s /Applications/Xcode_15.2.app
+          xcodebuild -version
+          cmake --version | head -1
+
+      - name: Build llama.xcframework
+        working-directory: llama.cpp
+        run: |
+          ./build-xcframework.sh
+
+      - name: Verify xcframework
+        run: |
+          ls -la build-apple/llama.xcframework
+          ls -la build-apple/llama.xcframework/ios-arm64
+
+      - name: Build AgentBox .app (unsigned)
+        run: |
+          xcodebuild \
+            -project AgentBox.xcodeproj \
+            -target AgentBox \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+
+      - name: Find .app
+        run: |
+          find build -name "AgentBox.app" -type d
+          APP_PATH=$(find build -name "AgentBox.app" -type d | head -1)
+          echo "APP_PATH=$APP_PATH" >> $GITHUB_ENV
+
+      - name: Assemble unsigned .ipa
+        run: |
+          rm -rf Payload
+          mkdir -p Payload
+          cp -R "$APP_PATH" Payload/
+          # 移除签名相关文件（未签名构建通常没有，但确保干净）
+          rm -rf Payload/AgentBox.app/_CodeSignature
+          # 打 zip 为 .ipa
+          /usr/bin/ditto -c -k --keepParent Payload AgentBox.unsigned.ipa
+          ls -la AgentBox.unsigned.ipa
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AgentBox-unsigned-ipa
+          path: AgentBox.unsigned.ipa
+          if-no-files-found: error
+
+      - name: Upload .app too
+        uses: actions/upload-artifact@v4
+        with:
+          name: AgentBox-app
+          path: build/Build/Products/Release-iphoneos/AgentBox.app
+          if-no-files-found: error

@@ -1,0 +1,24 @@
+# Build outputs
+build/
+build-apple/
+build-ios-*/
+build-macos/
+build-visionos*/
+build-tvos*/
+DerivedData/
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+*.moved-aside
+
+# Model files (large)
+*.gguf
+*.bin
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc

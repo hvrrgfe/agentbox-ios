@@ -1,0 +1,406 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000000000000000000000001 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000000000000000002 /* Metal.framework */; };
+		000000000000000000000003 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000000000000000004 /* Accelerate.framework */; };
+		000000000000000000000005 /* llama.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000000000000000006 /* llama.xcframework */; };
+		000000000000000000000007 /* llama.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000000000000000006 /* llama.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		000000000000000000000011 /* AgentBoxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000021 /* AgentBoxApp.swift */; };
+		000000000000000000000012 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000022 /* ContentView.swift */; };
+		000000000000000000000013 /* ModelSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000023 /* ModelSettingsView.swift */; };
+		000000000000000000000014 /* WebViewAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000024 /* WebViewAgent.swift */; };
+		000000000000000000000015 /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000025 /* LibLlama.swift */; };
+		000000000000000000000016 /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000026 /* LlamaState.swift */; };
+		000000000000000000000017 /* LoadCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000027 /* LoadCustomButton.swift */; };
+		000000000000000000000018 /* DownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000028 /* DownloadButton.swift */; };
+		000000000000000000000019 /* InputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000029 /* InputButton.swift */; };
+		000000000000000000000031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000041 /* Assets.xcassets */; };
+		000000000000000000000032 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000042 /* Web */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		000000000000000000000051 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				000000000000000000000007 /* llama.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		000000000000000000000002 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		000000000000000000000004 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		000000000000000000000006 /* llama.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = llama.xcframework; path = build-apple/llama.xcframework; sourceTree = "<group>"; };
+		000000000000000000000061 /* AgentBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgentBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000000000000000021 /* AgentBoxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentBoxApp.swift; sourceTree = "<group>"; };
+		000000000000000000000022 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		000000000000000000000023 /* ModelSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSettingsView.swift; sourceTree = "<group>"; };
+		000000000000000000000024 /* WebViewAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewAgent.swift; sourceTree = "<group>"; };
+		000000000000000000000025 /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
+		000000000000000000000026 /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
+		000000000000000000000027 /* LoadCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCustomButton.swift; sourceTree = "<group>"; };
+		000000000000000000000028 /* DownloadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadButton.swift; sourceTree = "<group>"; };
+		000000000000000000000029 /* InputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputButton.swift; sourceTree = "<group>"; };
+		000000000000000000000041 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		000000000000000000000042 /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
+		000000000000000000000043 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		000000000000000000000071 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000001 /* Metal.framework in Frameworks */,
+				000000000000000000000003 /* Accelerate.framework in Frameworks */,
+				000000000000000000000005 /* llama.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000000000000000000000081 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000082 /* AgentBox */,
+				000000000000000000000043 /* Info.plist */,
+				000000000000000000000083 /* Products */,
+				000000000000000000000084 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		000000000000000000000082 /* AgentBox */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000042 /* Web */,
+				000000000000000000000085 /* Models */,
+				000000000000000000000086 /* UI */,
+				000000000000000000000021 /* AgentBoxApp.swift */,
+				000000000000000000000041 /* Assets.xcassets */,
+			);
+			path = AgentBox;
+			sourceTree = "<group>";
+		};
+		000000000000000000000085 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000026 /* LlamaState.swift */,
+				000000000000000000000025 /* LibLlama.swift */,
+			);
+			name = Models;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		000000000000000000000086 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000022 /* ContentView.swift */,
+				000000000000000000000023 /* ModelSettingsView.swift */,
+				000000000000000000000024 /* WebViewAgent.swift */,
+				000000000000000000000029 /* InputButton.swift */,
+				000000000000000000000027 /* LoadCustomButton.swift */,
+				000000000000000000000028 /* DownloadButton.swift */,
+			);
+			name = UI;
+			path = UI;
+			sourceTree = "<group>";
+		};
+		000000000000000000000083 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000061 /* AgentBox.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		000000000000000000000084 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000006 /* llama.xcframework */,
+				000000000000000000000002 /* Metal.framework */,
+				000000000000000000000004 /* Accelerate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		000000000000000000000091 /* AgentBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0000000000000000000000B1 /* Build configuration list for PBXNativeTarget "AgentBox" */;
+			buildPhases = (
+				0000000000000000000000A1 /* Sources */,
+				000000000000000000000071 /* Frameworks */,
+				0000000000000000000000A2 /* Resources */,
+				000000000000000000000051 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AgentBox;
+			packageProductDependencies = (
+			);
+			productName = AgentBox;
+			productReference = 000000000000000000000061 /* AgentBox.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0000000000000000000000C1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					000000000000000000000091 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 0000000000000000000000C2 /* Build configuration list for PBXProject "AgentBox" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 000000000000000000000081;
+			packageReferences = (
+			);
+			productRefGroup = 000000000000000000000083 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000000000000000000000091 /* AgentBox */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0000000000000000000000A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000031 /* Assets.xcassets in Resources */,
+				000000000000000000000032 /* Web in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0000000000000000000000A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000011 /* AgentBoxApp.swift in Sources */,
+				000000000000000000000012 /* ContentView.swift in Sources */,
+				000000000000000000000013 /* ModelSettingsView.swift in Sources */,
+				000000000000000000000014 /* WebViewAgent.swift in Sources */,
+				000000000000000000000015 /* LibLlama.swift in Sources */,
+				000000000000000000000016 /* LlamaState.swift in Sources */,
+				000000000000000000000017 /* LoadCustomButton.swift in Sources */,
+				000000000000000000000018 /* DownloadButton.swift in Sources */,
+				000000000000000000000019 /* InputButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0000000000000000000000D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0000000000000000000000D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0000000000000000000000D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGNING_ALLOWED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.agentbox.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0000000000000000000000D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGNING_ALLOWED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.agentbox.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0000000000000000000000C2 /* Build configuration list for PBXProject "AgentBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0000000000000000000000D1 /* Debug */,
+				0000000000000000000000D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0000000000000000000000B1 /* Build configuration list for PBXNativeTarget "AgentBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0000000000000000000000D3 /* Debug */,
+				0000000000000000000000D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0000000000000000000000C1 /* Project object */;
+}

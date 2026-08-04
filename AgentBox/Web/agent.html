@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>AgentBox - 本地 Agent</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+:root {
+  --bg:#0f1115; --panel:#1a1d24; --panel2:#232733; --border:#2d323c;
+  --text:#e8eaed; --muted:#9aa3b2; --accent:#4c8dff; --accent2:#7c5cff;
+  --ok:#2ecc71; --err:#ff5f56; --tool:#ffb648; --user-bubble:#2b6cff; --agent-bubble:#1a1d24;
+}
+html,body{height:100%;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
+  display:flex; flex-direction:column; font-size:15px; line-height:1.6;
+  padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
+}
+/* ===== 顶栏 ===== */
+header{
+  display:flex; align-items:center; gap:8px; padding:10px 14px;
+  background:var(--panel); border-bottom:1px solid var(--border);
+}
+.brand{ font-weight:700; font-size:17px; display:flex; align-items:center; gap:8px; }
+.brand .b1{ color:var(--accent); } .brand .b2{ color:var(--accent2); }
+.model-pill{
+  margin-left:auto; display:flex; align-items:center; gap:6px;
+  background:var(--panel2); border:1px solid var(--border); border-radius:20px;
+  padding:4px 10px; font-size:12px; color:var(--muted); max-width:46%; overflow:hidden;
+}
+.model-pill .dot{ width:7px; height:7px; border-radius:50%; background:var(--muted); }
+.model-pill.loaded .dot{ background:var(--ok); }
+.model-pill .name{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.refresh-btn{ background:none; border:none; color:var(--muted); font-size:18px; cursor:pointer; }
+
+/* ===== 消息区 ===== */
+#msgs{ flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:12px; }
+.msg{ max-width:82%; border-radius:14px; padding:10px 13px; white-space:pre-wrap; word-break:break-word; font-size:15px; }
+.msg.user{ align-self:flex-end; background:var(--user-bubble); color:#fff; }
+.msg.agent{ align-self:flex-start; background:var(--agent-bubble); border:1px solid var(--border); }
+.msg.tool{ align-self:flex-start; background:transparent; border:none; padding:3px 0; color:var(--muted); font-size:13px; max-width:100%; }
+.msg.err{ align-self:flex-start; background:rgba(255,95,86,.12); border:1px solid var(--err); color:var(--err); }
+.msg .role-tag{ display:inline-block; font-size:11px; padding:1px 7px; border-radius:8px; background:var(--panel2); color:var(--muted); margin-bottom:4px; }
+.msg .tool-tag{ color:var(--tool); font-weight:600; }
+.cursor{ display:inline-block; width:8px; height:16px; background:var(--accent); animation:blink 0.8s step-start infinite; vertical-align:middle; }
+@keyframes blink{ 50%{opacity:0;} }
+.thinking{ color:var(--muted); font-size:13px; display:flex; gap:6px; align-items:center; }
+.spinner{ width:13px; height:13px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; }
+@keyframes spin{ to{ transform:rotate(360deg);} }
+.quick-row{ display:flex; gap:8px; flex-wrap:wrap; padding:0 14px 6px; }
+.quick-chip{ background:var(--panel2); color:var(--muted); border:1px solid var(--border); border-radius:16px; padding:6px 12px; font-size:13px; cursor:pointer; }
+.quick-chip:active{ background:var(--panel); }
+.quick-chip.off{ opacity:.45; }
+
+/* ===== 输入区 ===== */
+#inputbar{ display:flex; align-items:flex-end; gap:8px; padding:10px 12px; background:var(--panel); border-top:1px solid var(--border); }
+#input{
+  flex:1; background:var(--panel2); border:1px solid var(--border); border-radius:20px;
+  padding:10px 14px; color:var(--text); font-size:15px; outline:none; resize:none; max-height:120px;
+  font-family:inherit;
+}
+#input::placeholder{ color:var(--muted); }
+#send{
+  background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;
+  border:none; border-radius:20px; padding:10px 18px; font-size:15px; font-weight:600; cursor:pointer;
+}
+#send:disabled{ opacity:.5; }
+.mode-row{ display:flex; gap:6px; padding:6px 12px 0; align-items:center; }
+.mode-toggle{ display:flex; background:var(--panel2); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.mode-toggle button{ background:none; border:none; color:var(--muted); padding:6px 12px; font-size:13px; cursor:pointer; }
+.mode-toggle button.active{ background:var(--accent); color:#fff; }
+
+/* 空态 */
+#empty{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted); gap:10px; padding:40px; text-align:center; }
+#empty .logo{ font-size:48px; font-weight:800; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+#empty h2{ font-size:20px; font-weight:700; color:var(--text); }
+#empty p{ font-size:14px; }
+#empty .status{ font-size:13px; background:var(--panel2); border:1px solid var(--border); padding:6px 12px; border-radius:10px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="b1">Agent</span><span class="b2">Box</span></div>
+  <div class="model-pill" id="modelPill"><span class="dot"></span><span class="name" id="modelName">未加载模型</span></div>
+  <button class="refresh-btn" id="refreshBtn" title="清空对话">↺</button>
+</header>
+
+<div id="msgs">
+  <div id="empty">
+    <div class="logo">◆</div>
+    <h2>本地大模型 · 自主 Agent</h2>
+    <p>依赖 llama.cpp 在 iPhone 上离线推理（Metal 加速）<br>支持导入 GGUF / GPT-Q 等模型文件</p>
+    <div class="status" id="modelStatus">加载模型中…</div>
+  </div>
+</div>
+
+<div class="mode-row">
+  <div class="mode-toggle" id="modeToggle">
+    <button id="modeNormal" class="active">对话</button>
+    <button id="modeAgent">Agent 自主执行</button>
+  </div>
+</div>
+<div class="quick-row" id="quickRow">
+  <span class="quick-chip" data-p="推荐一款适合 iPhone 的本地模型">推荐小模型</span>
+  <span class="quick-chip" data-p="帮我列出 5 个提升效率的计划">制定计划</span>
+  <span class="quick-chip" data-p="用中文解释什么是 reAct 模式">解释 reAct</span>
+  <span class="quick-chip" data-p="总结刚才的对话重点">总结</span>
+</div>
+
+<div id="inputbar">
+  <textarea id="input" rows="1" placeholder="输入消息…"></textarea>
+  <button id="send">发送</button>
+</div>
+
+<script>window.AGENTBOX=1;</script>
+<script src="agent.js"></script>
+</body>
+</html>
