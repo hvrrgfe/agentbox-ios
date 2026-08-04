@@ -14,32 +14,30 @@ jobs:
     runs-on: macos-14
     timeout-minutes: 60
     steps:
-      - name: Checkout repo
+      - name: Checkout repo (with submodules)
         uses: actions/checkout@v4
         with:
+          submodules: recursive
           fetch-depth: 1
 
       - name: Select Xcode
         run: |
+          echo "Available Xcodes:"
           sudo xcode-select -s /Applications/Xcode_15.2.app
           xcodebuild -version
           cmake --version | head -1
-
-      # llama.cpp 固定版本，保证可复现构建（该提交含 qwen3 聊天解析器）
-      - name: Clone llama.cpp (pinned)
-        run: |
-          git clone --depth 1 https://github.com/ggml-org/llama.cpp.git llama.cpp
-          cd llama.cpp && git fetch --depth 1 origin f5919bf458ef190468b5c329bb293f8a54a1e69c && git checkout f5919bf458ef190468b5c329bb293f8a54a1e69c
 
       - name: Build llama.xcframework
         working-directory: llama.cpp
         run: |
           ./build-xcframework.sh
 
-      - name: Verify xcframework
+      # 把 xcframework 移到 repo 根的 build-apple/（与 pbxproj 相对路径一致）
+      - name: Stage xcframework to repo root
         run: |
+          mkdir -p build-apple
+          cp -R llama.cpp/build-apple/llama.xcframework build-apple/
           ls -la build-apple/llama.xcframework
-          ls build-apple/llama.xcframework
 
       - name: Build AgentBox .app (unsigned)
         run: |
@@ -65,18 +63,20 @@ jobs:
           rm -rf Payload
           mkdir -p Payload
           cp -R "$APP_PATH" Payload/
+          # 移除签名相关文件（未签名构建通常没有，但确保干净）
           rm -rf Payload/AgentBox.app/_CodeSignature
+          # 打 zip 为 .ipa
           /usr/bin/ditto -c -k --keepParent Payload AgentBox.unsigned.ipa
           ls -la AgentBox.unsigned.ipa
 
-      - name: Upload unsigned .ipa
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: AgentBox-unsigned-ipa
           path: AgentBox.unsigned.ipa
           if-no-files-found: error
 
-      - name: Upload .app
+      - name: Upload .app too
         uses: actions/upload-artifact@v4
         with:
           name: AgentBox-app
