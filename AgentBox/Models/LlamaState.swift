@@ -92,26 +92,22 @@ class LlamaState: ObservableObject {
         await llamaContext.completion_init(text: text)
         let t_heat_end = DispatchTime.now().uptimeNanoseconds
 
-        Task.detached {
-            var localFull = ""
-            while await !llamaContext.is_done {
-                let result = await llamaContext.completion_loop()
-                if !result.isEmpty {
-                    localFull += result
-                    streamTo(result)
-                }
-            }
-
-            let t_end = DispatchTime.now().uptimeNanoseconds
-            let tg = Double(t_end - t_heat_end) / self.NS_PER_S
-            let n = Double(await llamaContext.n_len)
-            let tps = tg > 0 ? (n / tg) : 0
-
-            await llamaContext.clear()
-            await MainActor.run {
-                onDone(localFull, tps)
+        var localFull = ""
+        while await !llamaContext.is_done {
+            let result = await llamaContext.completion_loop()
+            if !result.isEmpty {
+                localFull += result
+                streamTo(result)
             }
         }
+
+        let t_end = DispatchTime.now().uptimeNanoseconds
+        let tg = Double(t_end - t_heat_end) / self.NS_PER_S
+        let n = Double(await llamaContext.n_len)
+        let tps = tg > 0 ? (n / tg) : 0
+
+        await llamaContext.clear()
+        onDone(localFull, tps)
     }
 
     func bench() async {
